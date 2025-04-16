@@ -1,7 +1,12 @@
+import BackButton from "../components/Buttons/BackButton";
 
 function TeamBuilder() {
   return (
-    <div>TeamBuilder</div>
+    <div>
+      <BackButton />
+      <div>TeamBuilder</div>
+    </div>
+    
   )
 }
 
