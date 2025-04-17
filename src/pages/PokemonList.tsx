@@ -1,13 +1,24 @@
 import BackButton from "../components/Buttons/BackButton";
-import { Grid, Typography } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Typography, Button, CircularProgress } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import { usePokemonList } from "../features/pokemon/hooks";
 
 const PokemonList = () => {
-  const { data, isLoading, error } = usePokemonList();
+  const [offset, setOffset] = useState(0);
+  const [allPokemon, setAllPokemon] = useState<{ name: string; url: string }[]>([]);
 
-  if (isLoading) return <Typography>Loading...</Typography>;
-  if (error || !data) return <Typography>Error loading Pokémon.</Typography>;
+  const { data, isLoading, isFetching, error } = usePokemonList(20, offset);
+
+  useEffect(() => {
+    if (data?.results) {
+      setAllPokemon((prev) => [...prev, ...data.results]);
+    }
+  }, [data]);
+
+  if (isLoading && offset === 0) return <Typography>Loading...</Typography>;
+  if (error) return <Typography>Error loading Pokémon.</Typography>;
 
   return (
     <>
@@ -17,16 +28,13 @@ const PokemonList = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        {data.results.map((pokemon) => (
+        {allPokemon.map((pokemon) => (
           <Grid
             key={pokemon.name}
-            size={{ xs: 6, sm: 4, md: 3 }}
+            size={{ xs: 12, sm: 6, md: 3 }}
             component="div"
           >
-            <Link
-              to={`/pokemon/${pokemon.name}`}
-              style={{ textDecoration: "none" }}
-            >
+            <Link to={`/pokemon/${pokemon.name}`} style={{ textDecoration: "none" }}>
               <div
                 style={{
                   background: "#eeeeee",
@@ -42,6 +50,18 @@ const PokemonList = () => {
           </Grid>
         ))}
       </Grid>
+
+      {data?.next && (
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+          <Button
+            variant="contained"
+            onClick={() => setOffset((prev) => prev + 20)}
+            disabled={isFetching}
+          >
+            {isFetching ? <CircularProgress size={20} /> : "Load More"}
+          </Button>
+        </div>
+      )}
     </>
   );
 };

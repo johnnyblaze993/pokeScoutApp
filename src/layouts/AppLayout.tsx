@@ -6,14 +6,15 @@ const AppLayout = () => {
 
   return (
     <Box
-      sx={{
-        height: "100vh",
-        width: "100vw",
-        backgroundColor: theme.palette.background.default,
-        color: theme.palette.text.primary,
-        overflow: "hidden",
-      }}
-    >
+    sx={{
+      minHeight: "100vh", // ✅ allow full height + scroll
+      width: "100%",
+      backgroundColor: theme.palette.background.default,
+      color: theme.palette.text.primary,
+      overflowX: "hidden", // ✅ only hide horizontal scroll
+    }}
+  >
+  
       <Container
         maxWidth="lg"
         sx={{
