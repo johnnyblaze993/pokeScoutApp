@@ -5,6 +5,11 @@ import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import { usePokemonList } from "../features/pokemon/hooks";
 
+const extractIdFromUrl = (url: string) => {
+  const parts = url.split("/").filter(Boolean);
+  return parts[parts.length - 1]; // The last part is the ID
+}
+
 const PokemonList = () => {
   const [offset, setOffset] = useState(0);
   const [allPokemon, setAllPokemon] = useState<{ name: string; url: string }[]>([]);
@@ -28,27 +33,40 @@ const PokemonList = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        {allPokemon.map((pokemon) => (
-          <Grid
-            key={pokemon.name}
-            size={{ xs: 12, sm: 6, md: 3 }}
-            component="div"
-          >
-            <Link to={`/pokemon/${pokemon.name}`} style={{ textDecoration: "none" }}>
-              <div
-                style={{
-                  background: "#eeeeee",
-                  padding: "1rem",
-                  borderRadius: "8px",
-                  textAlign: "center",
-                  color: "black",
-                }}
-              >
-                <Typography variant="h6">{pokemon.name}</Typography>
-              </div>
-            </Link>
-          </Grid>
-        ))}
+      {allPokemon.map((pokemon) => {
+          const id = extractIdFromUrl(pokemon.url);
+          const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+
+          return (
+            <Grid key={pokemon.name} size={{ xs: 6, sm: 4, md: 3 }} component="div">
+              <Link to={`/pokemon/${pokemon.name}`} style={{ textDecoration: "none" }}>
+                <div
+                  style={{
+                    background: "#eeeeee",
+                    padding: "1rem",
+                    borderRadius: "8px",
+                    textAlign: "center",
+                    color: "black",
+                  }}
+                >
+                  <img
+                    src={spriteUrl}
+                    alt={pokemon.name}
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      objectFit: "contain",
+                      marginBottom: "0.5rem",
+                    }}
+                  />
+                  <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
+                    {pokemon.name}
+                  </Typography>
+                </div>
+              </Link>
+            </Grid>
+          );
+        })}
       </Grid>
 
       {data?.next && (

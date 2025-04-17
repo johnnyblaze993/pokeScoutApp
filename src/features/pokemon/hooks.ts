@@ -14,6 +14,6 @@ export const usePokemonList = (limit = 20, offset = 0) => {
   return useQuery<PokemonListResponse>({
     queryKey: ["pokemonList", offset],
     queryFn: () => getAllPokemon(limit, offset),
-    staleTime: 1000 * 60, // optional: keeps data fresh
+    staleTime: 1000 * 60, // optional: keeps data fresh for 1 minute
   });
 };
