@@ -1,7 +1,7 @@
 import { Typography, CircularProgress, Chip, Box, LinearProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { usePokemonById } from "../features/pokemon/hooks";
-import BackButton from "../components/Buttons/BackButton";
+import { usePokemonById } from "../hooks";
+import BackButton from "../../../components/Buttons/BackButton";
 
 const PokemonDetail = () => {
   const { id } = useParams<{ id: string }>();

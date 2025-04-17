@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import PokemonList from "./pages/PokemonList";
-import PokemonDetail from "./pages/PokemonDetail";
+import PokemonList from "./features/pokemon/pages/PokemonList";
+import PokemonDetail from "./features/pokemon/pages/PokemonDetail";
 import TeamBuilder from "./pages/TeamBuilder";
 import Favorites from "./pages/Favorites";
 import NotFound from "./pages/NotFound";

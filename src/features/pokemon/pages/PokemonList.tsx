@@ -1,9 +1,9 @@
-import BackButton from "../components/Buttons/BackButton";
+import BackButton from "../../../components/Buttons/BackButton";
 import { useState, useEffect } from "react";
 import { Typography, Button, CircularProgress } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
-import { usePokemonList } from "../features/pokemon/hooks";
+import { usePokemonList } from "../hooks";
 
 const extractIdFromUrl = (url: string) => {
   const parts = url.split("/").filter(Boolean);
