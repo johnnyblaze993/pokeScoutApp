@@ -1,4 +1,4 @@
-import { Typography, CircularProgress, Chip, Grid, Box, LinearProgress } from "@mui/material";
+import { Typography, CircularProgress, Chip, Box, LinearProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { usePokemonById } from "../features/pokemon/hooks";
 import BackButton from "../components/Buttons/BackButton";
