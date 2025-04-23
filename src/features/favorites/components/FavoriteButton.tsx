@@ -1,4 +1,3 @@
-
 import { IconButton } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useFavoritesStore } from "../../../store/favoriteStore";
@@ -12,9 +11,9 @@ const FavoriteButton = ({ name }: FavoriteButtonProps) => {
 
   const handleClick = () => {
     if (isFavorite(name)) {
-      removeFavorite(name);
+      removeFavorite(name); // Remove from favorites if already a favorite
     } else {
-      addFavorite(name);
+      addFavorite(name); // Add to favorites if not already a favorite
     }
   };
 
