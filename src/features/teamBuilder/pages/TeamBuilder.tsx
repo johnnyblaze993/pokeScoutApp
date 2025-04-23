@@ -1,4 +1,4 @@
-import BackButton from "../components/Buttons/BackButton";
+import BackButton from "../../../components/Buttons/BackButton";
 
 function TeamBuilder() {
   return (

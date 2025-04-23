@@ -19,42 +19,45 @@ const PokemonDetail = () => {
   return (
     <>
       <BackButton />
-      <Box sx={{ textAlign: "center", mt: 2 }}>
-        {spriteUrl && (
-          <img
-            src={spriteUrl}
-            alt={data.name}
-            style={{ width: "200px", height: "200px", objectFit: "contain" }}
-          />
-        )}
-        <Typography variant="h4" sx={{ mt: 2 }}>
-          {capitalizedName}
-        </Typography>
-
-        {/* Types */}
-        <Box sx={{ mt: 2 }}>
-          {data.types.map(({ type }) => (
-            <Chip
-              key={type.name}
-              label={type.name.toUpperCase()}
-              color="primary"
-              sx={{ margin: "0.5rem" }}
+      <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "flex-start", gap: 4, mt: 2 }}>
+        {/* Left Section */}
+        <Box sx={{ flex: 1, textAlign: "center" }}>
+          {spriteUrl && (
+            <img
+              src={spriteUrl}
+              alt={data.name}
+              style={{ width: "200px", height: "200px", objectFit: "contain" }}
             />
-          ))}
-        </Box>
-
-        {/* Abilities */}
-        <Box sx={{ mt: 4 }}>
-          <Typography variant="h6" gutterBottom>
-            Abilities:
+          )}
+          <Typography variant="h4" sx={{ mt: 2 }}>
+            {capitalizedName}
           </Typography>
-          {data.abilities.map(({ ability }) => (
-            <Typography key={ability.name}>{ability.name}</Typography>
-          ))}
+
+          {/* Types */}
+          <Box sx={{ mt: 2 }}>
+            {data.types.map(({ type }) => (
+              <Chip
+                key={type.name}
+                label={type.name.toUpperCase()}
+                color="primary"
+                sx={{ margin: "0.2rem" }}
+              />
+            ))}
+          </Box>
+
+          {/* Abilities */}
+          <Box sx={{ mt: 4 }}>
+            <Typography variant="h6" gutterBottom>
+              Abilities:
+            </Typography>
+            {data.abilities.map(({ ability }) => (
+              <Typography key={ability.name}>{ability.name}</Typography>
+            ))}
+          </Box>
         </Box>
 
-        {/* Base Stats */}
-        <Box sx={{ mt: 4, width: "100%", maxWidth: "600px", margin: "auto" }}>
+        {/* Right Section */}
+        <Box sx={{ flex: 1, width: "100%", maxWidth: "600px" }}>
           <Typography variant="h6" gutterBottom textAlign="center">
             Base Stats:
           </Typography>
@@ -79,7 +82,6 @@ const PokemonDetail = () => {
             </Box>
           ))}
         </Box>
-
       </Box>
     </>
   );

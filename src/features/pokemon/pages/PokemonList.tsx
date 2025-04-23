@@ -1,8 +1,9 @@
+import FavoriteButton from "../../favorites/components/FavoriteButton";
 import BackButton from "../../../components/Buttons/BackButton";
 import { useState, useEffect } from "react";
 import { Typography, Button, CircularProgress } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { usePokemonList } from "../hooks";
 
 const extractIdFromUrl = (url: string) => {
@@ -10,7 +11,10 @@ const extractIdFromUrl = (url: string) => {
   return parts[parts.length - 1]; // The last part is the ID
 }
 
+
+
 const PokemonList = () => {
+  const navigate = useNavigate();
   const [offset, setOffset] = useState(0);
   const [allPokemon, setAllPokemon] = useState<{ name: string; url: string }[]>([]);
 
@@ -32,14 +36,14 @@ const PokemonList = () => {
         📋 Browse Pokémon
       </Typography>
 
-      <Grid container spacing={2}>
-      {allPokemon.map((pokemon) => {
-          const id = extractIdFromUrl(pokemon.url);
-          const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+      <div style={{ height: "calc(100vh - 150px)", overflowY: "auto", padding: ".5rem" }}>
+        <Grid container spacing={2}>
+          {allPokemon.map((pokemon) => {
+            const id = extractIdFromUrl(pokemon.url);
+            const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
-          return (
-            <Grid key={pokemon.name} size={{ xs: 6, sm: 4, md: 3 }} component="div">
-              <Link to={`/pokemon/${pokemon.name}`} style={{ textDecoration: "none" }}>
+            return (
+              <Grid key={pokemon.name} size={{ xs: 6, sm: 4, md: 3 }} component="div">
                 <div
                   style={{
                     background: "#eeeeee",
@@ -47,8 +51,23 @@ const PokemonList = () => {
                     borderRadius: "8px",
                     textAlign: "center",
                     color: "black",
+                    position: "relative",
+                    cursor: "pointer",
                   }}
+                  onClick={() => navigate(`/pokemon/${pokemon.name}`)}
                 >
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "0.5rem",
+                      right: "0.5rem",
+                      zIndex: 2,
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <FavoriteButton name={pokemon.name} />
+                  </div>
+              
                   <img
                     src={spriteUrl}
                     alt={pokemon.name}
@@ -63,23 +82,23 @@ const PokemonList = () => {
                     {pokemon.name}
                   </Typography>
                 </div>
-              </Link>
-            </Grid>
-          );
-        })}
-      </Grid>
+              </Grid>
+            );
+          })}
+        </Grid>
 
-      {data?.next && (
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-          <Button
-            variant="contained"
-            onClick={() => setOffset((prev) => prev + 20)}
-            disabled={isFetching}
-          >
-            {isFetching ? <CircularProgress size={20} /> : "Load More"}
-          </Button>
-        </div>
-      )}
+        {data?.next && (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+            <Button
+              variant="contained"
+              onClick={() => setOffset((prev) => prev + 20)}
+              disabled={isFetching}
+            >
+              {isFetching ? <CircularProgress size={20} /> : "Load More"}
+            </Button>
+          </div>
+        )}
+      </div>
     </>
   );
 };
