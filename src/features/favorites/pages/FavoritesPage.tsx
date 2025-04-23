@@ -1,10 +1,13 @@
 import BackButton from "../../../components/Buttons/BackButton"
 import { Typography, Grid } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFavoritesStore } from "../store/favoriteStore";
+import TeamBuilderButton from "../../teamBuilder/components/TeamBuilderButton";
 
 const FavoritesPage = () => {
   const { favorites } = useFavoritesStore();
+
+  const navigate = useNavigate();
 
   if (favorites.length === 0) {
     return <Typography>No favorites yet. ❤️</Typography>;
@@ -20,22 +23,30 @@ const FavoritesPage = () => {
       <Grid container spacing={2}>
         {favorites.map((name) => (
           <Grid key={name} size={{ xs: 6, sm: 4, md: 3 }} component="div">
-            <Link to={`/pokemon/${name}`} style={{ textDecoration: "none" }}>
-              <div
-                style={{
-                  background: "#eeeeee",
-                  padding: "1rem",
-                  borderRadius: "8px",
-                  textAlign: "center",
-                  color: "black",
-                }}
-              >
-                <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
-                  {name}
-                </Typography>
-              </div>
-            </Link>
-          </Grid>
+          <div
+            onClick={() => navigate(`/pokemon/${name}`)}
+            style={{
+              background: "#eeeeee",
+              padding: "1rem",
+              borderRadius: "8px",
+              textAlign: "center",
+              color: "black",
+              position: "relative",
+              cursor: "pointer",
+            }}
+          >
+            <div
+              style={{ position: "absolute", top: "0.5rem", right: "0.5rem" }}
+              // onClick={(e) => e.stopPropagation()} // 🧠 Prevent card click
+            >
+              <TeamBuilderButton name={name} />
+            </div>
+        
+            <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
+              {name}
+            </Typography>
+          </div>
+        </Grid>
         ))}
       </Grid>
     </>

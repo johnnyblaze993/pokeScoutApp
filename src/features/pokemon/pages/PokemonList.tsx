@@ -5,6 +5,7 @@ import { Typography, Button, CircularProgress } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import { usePokemonList } from "../hooks";
+import TeamBuilderButton from "../../teamBuilder/components/TeamBuilderButton";
 
 const extractIdFromUrl = (url: string) => {
   const parts = url.split("/").filter(Boolean);
@@ -65,9 +66,10 @@ const PokemonList = () => {
                     }}
                     onClick={(e) => e.stopPropagation()}
                   >
+                    <TeamBuilderButton name={pokemon.name} />
                     <FavoriteButton name={pokemon.name} />
                   </div>
-              
+
                   <img
                     src={spriteUrl}
                     alt={pokemon.name}
