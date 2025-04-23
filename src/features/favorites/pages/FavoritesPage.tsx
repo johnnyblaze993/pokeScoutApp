@@ -1,7 +1,7 @@
 import BackButton from "../../../components/Buttons/BackButton"
 import { Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useFavoritesStore } from "../../../store/favoriteStore";
+import { useFavoritesStore } from "../store/favoriteStore";
 
 const FavoritesPage = () => {
   const { favorites } = useFavoritesStore();

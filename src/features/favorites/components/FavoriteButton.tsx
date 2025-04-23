@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { useFavoritesStore } from "../../../store/favoriteStore";
+import { useFavoritesStore } from "../store/favoriteStore";
 
 interface FavoriteButtonProps {
   name: string;
