@@ -16,12 +16,18 @@ const TeamAggregator = () => {
 	};
 
 	return (
-		<>
+		<div
+			style={{
+				height: "calc(100vh - 150px)",
+				overflowY: "auto",
+				padding: "1rem",
+			}}
+		>
 			{team.map((name) => (
 				<TeamStatsFetcher key={name} name={name} onLoad={handleLoad} />
 			))}
 			{teamData.length > 0 && <TypeCoverageVisualizer team={teamData} />}
-		</>
+		</div>
 	);
 };
 
