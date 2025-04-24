@@ -56,3 +56,9 @@ export const getPokemonByName = async (name: string) => {
 
 	return parsed.data;
 };
+
+export const getTypeData = async (typeName: string) => {
+	const res = await fetch(`${BASE_URL}/type/${typeName}`);
+	if (!res.ok) throw new Error("Failed to fetch type data");
+	return res.json();
+};

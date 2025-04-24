@@ -63,3 +63,16 @@ export const PokemonListResponseSchema = z.object({
 
 export type PokemonListResponse = z.infer<typeof PokemonListResponseSchema>;
 export type PokemonListItem = z.infer<typeof PokemonListResult>;
+
+export const TypeRelationSchema = z.object({
+	damage_relations: z.object({
+		double_damage_to: z.array(z.object({ name: z.string(), url: z.string() })),
+		double_damage_from: z.array(
+			z.object({ name: z.string(), url: z.string() })
+		),
+		half_damage_from: z.array(z.object({ name: z.string(), url: z.string() })),
+		no_damage_from: z.array(z.object({ name: z.string(), url: z.string() })),
+	}),
+});
+
+export type TypeRelation = z.infer<typeof TypeRelationSchema>;
