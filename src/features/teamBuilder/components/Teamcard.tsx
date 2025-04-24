@@ -33,7 +33,10 @@ const TeamCard = ({ name }: Props) => {
 				style={{ width: 100, height: 100 }}
 			/>
 
-			<Typography variant="h6" sx={{ textTransform: "capitalize" }}>
+			<Typography
+				variant="h6"
+				sx={{ textTransform: "capitalize", color: "black" }}
+			>
 				{pokemon.name}
 			</Typography>
 
