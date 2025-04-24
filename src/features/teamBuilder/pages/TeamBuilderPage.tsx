@@ -20,20 +20,41 @@ const TeamBuilderPage = () => {
 	}
 
 	return (
-		<>
-			<BackButton />
-			<Typography variant="h4" gutterBottom>
-				👥 Your Team
-			</Typography>
-			<Grid container spacing={2}>
-				{team.map((name) => (
-					<Grid key={name} size={{ xs: 6, sm: 4, md: 3 }} component="div">
-						<TeamCard name={name} />
-					</Grid>
-				))}
-			</Grid>
-			<TeamAggregator />
-		</>
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "row",
+				justifyContent: "space-between",
+				alignItems: "flex-start",
+				height: "calc(100vh - 150px)",
+				padding: "1rem",
+				gap: "1rem",
+			}}
+		>
+			{/* Left Section: Team Cards */}
+			<div style={{ flex: 1.5, overflowY: "auto" }}>
+				{" "}
+				{/* Reduced flex value */}
+				<BackButton />
+				<Typography variant="h4" gutterBottom>
+					👥 Your Team
+				</Typography>
+				<Grid container spacing={2}>
+					{team.map((name) => (
+						<Grid key={name} size={{ xs: 6, sm: 4, md: 3 }} component="div">
+							<TeamCard name={name} />
+						</Grid>
+					))}
+				</Grid>
+			</div>
+
+			{/* Right Section: Type Synergy */}
+			<div style={{ flex: 2, overflowY: "auto" }}>
+				{" "}
+				{/* Increased flex value */}
+				<TeamAggregator />
+			</div>
+		</div>
 	);
 };
 

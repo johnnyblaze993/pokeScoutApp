@@ -19,8 +19,10 @@ const TeamAggregator = () => {
 		<div
 			style={{
 				height: "calc(100vh - 150px)",
-				overflowY: "auto",
+				width: "100%", // Ensure the container takes the full width
+				overflowX: "hidden", // Prevent horizontal scrolling
 				padding: "1rem",
+				boxSizing: "border-box", // Include padding in width calculation
 			}}
 		>
 			{team.map((name) => (
