@@ -2,6 +2,7 @@ import { useTeamStore } from "../store/teamStore";
 import { Typography, Grid } from "@mui/material";
 import BackButton from "../../../components/Buttons/BackButton";
 import TeamCard from "../components/Teamcard";
+import TeamAggregator from "../components/TeamAggregator";
 
 const TeamBuilderPage = () => {
 	const { team } = useTeamStore();
@@ -31,6 +32,7 @@ const TeamBuilderPage = () => {
 					</Grid>
 				))}
 			</Grid>
+			<TeamAggregator />
 		</>
 	);
 };
